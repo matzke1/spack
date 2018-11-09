@@ -1,0 +1,13 @@
+diff --git a/build.sh b/build.sh
+index fa00c4e..9d81b28 100755
+--- a/build.sh
++++ b/build.sh
+@@ -18,6 +18,7 @@ else
+ fi
+ LDFLAGS="$LDFLAGS -lm"
+ : ${CC:=gcc}
++echo "CONFIG_CC=$CC" >tup.config
+ case "$os" in
+        Linux)
+        plat_files="$plat_files ../src/compat/dummy.c"
+

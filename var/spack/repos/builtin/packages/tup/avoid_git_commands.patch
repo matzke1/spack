@@ -1,0 +1,17 @@
+diff --git a/src/tup/link.sh b/src/tup/link.sh
+index ed9a01c..fb22d72 100755
+--- a/src/tup/link.sh
++++ b/src/tup/link.sh
+@@ -4,7 +4,11 @@
+ # linking, so that the version is updated whenever we change anything that
+ # affects the tup binary. This used to live in the Tupfile, but to support
+ # Windows local builds we need to make it an explicit shell script.
+-version=`git describe`
++if [ "$SPACK_SHORT_SPEC" != "" ]; then
++    version="$(echo "$SPACK_SHORT_SPEC" |cut -d@ -f2 |cut -d% -f1)"
++else
++    version=`git describe`
++fi
+ CC=$1
+ CFLAGS=$2
+ LDFLAGS=$3
