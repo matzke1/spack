@@ -21,7 +21,8 @@ class Z3(MakefilePackage):
     phases = ['bootstrap', 'build', 'install']
 
     variant('python', default=False, description='Enable python support')
-    depends_on('python', when='+python')
+    depends_on('python', type='build', when='-python') # required for the bootstrap step
+    depends_on('python', type='run', when='+python')
 
     build_directory = 'build'
 
