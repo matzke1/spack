@@ -45,7 +45,11 @@ class Pango(AutotoolsPackage):
         return args
 
     def install(self, spec, prefix):
-        make("install", parallel=False)
+        import subprocess;
+        subprocess.check_call(['bash', '-c', """
+            set -ex
+            unset PYTHONHOME
+            make install"""])
 
     def setup_dependent_environment(self, spack_env, run_env, dependent_spec):
         spack_env.prepend_path("XDG_DATA_DIRS",
